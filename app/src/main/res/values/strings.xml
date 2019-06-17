@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">MoodTrackerImproved</string>
+    <string name="app_name">Mood Tracking OC</string>
+    <string name="historyButton">View history</string>
+    <string name="commentButton">Add or view a comment</string>
+    <string name="sad">Sad face</string>
+    <string name="disappointed">Disappointed face</string>
+    <string name="normal">Normal face</string>
+    <string name="happy">Happy face</string>
+    <string name="superHappy">Super happy face</string>
+    <string name="comment">Comment</string>
+    <string name="commentHint">Enter you comment</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="commentImage">This mood has a comment</string>
+
 </resources>
