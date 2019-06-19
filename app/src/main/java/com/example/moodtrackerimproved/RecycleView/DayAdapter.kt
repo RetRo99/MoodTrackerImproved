@@ -9,10 +9,12 @@ import com.example.moodtrackerimproved.R
 import com.example.moodtrackerimproved.Utils.inflate
 import kotlinx.android.synthetic.main.row_item.view.*
 
+
+
 class DayAdapter( private val height: Int, private val width: Int) :
     RecyclerView.Adapter<DayAdapter.DayHolder>() {
 
-     lateinit var daysInOrder: ArrayList<Day>
+     lateinit var daysInOrder: List<Day>
 
 
     //Nested class with viewHolders that hold the references to layout items
@@ -22,13 +24,17 @@ class DayAdapter( private val height: Int, private val width: Int) :
 
 
         fun bindDay(day: Day, height: Int, width: Int) {
+
+            val params = view.constraintLayoutRecycle.layoutParams
+            params.width = width/ day.mood.moodInt
+            params.height = height
             //Setting the height of the item
-            view.constraintLayoutRecycle.layoutParams.height = height
+            view.constraintLayoutRecycle.layoutParams = params
 
             //Check if day has comment
             if (!day.hasComment) {
                 //If it does not have a comment hide the ImageView (it is shown by default as set in history_activity.xml)
-                view.hasCommentImage.visibility = View.INVISIBLE
+                view.commentImage.visibility = View.INVISIBLE
             } else {
                 //If it has a comment create a an onClickListener that displays toast using Day objects comment
                 view.constraintLayoutRecycle.setOnClickListener {
@@ -37,10 +43,8 @@ class DayAdapter( private val height: Int, private val width: Int) :
 
 
             }
-
             //Setting the color based on the mood
-            view.setBackgroundResource(day.mood.backgroundResource)
-            view.constraintLayoutRecycle.layoutParams.width = width / day.mood.moodInt
+            view.constraintLayoutRecycle.setBackgroundResource(day.mood.backgroundResource)
 
             //Setting the text in textview so we how many days ago this mood happened
             view.daysAgoTextView.text = day.daysAgo

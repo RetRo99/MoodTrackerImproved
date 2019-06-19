@@ -11,7 +11,7 @@ class HistoryActivityViewModel(application: Application): AndroidViewModel(appli
 
     private val moodBank = MoodBank()
 
-    val daysInOrder = MutableLiveData<ArrayList<Day>>()
+    val daysInOrder = MutableLiveData<List<Day>>()
 
 
 

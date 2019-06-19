@@ -41,7 +41,7 @@ class MoodBank {
         )
     }
 
-    fun getOrderedDays(context: Context): ArrayList<Day> {
+    fun getOrderedDays(context: Context): List<Day> {
 
         //Getting
         val keeper = MoodKeeper(context)
@@ -53,13 +53,13 @@ class MoodBank {
         )
 
         val daysAgo = arrayOf(
-            "One week ago",
-            "Six days ago",
-            "Five days ago",
-            "Four days ago",
-            "Three days ago",
+            "Yesterday",
             "Two days ago",
-            "Yesterday"
+            "Three days ago",
+            "Four days ago",
+            "Five days ago",
+            "Six days ago",
+            "One week ago"
         )
 
         //Getting the index of current day. If we know current day index we also know the index of yesterday
@@ -79,7 +79,7 @@ class MoodBank {
 
         }
 
-        return daysInOrder
+        return daysInOrder.reversed()
 
 
     }

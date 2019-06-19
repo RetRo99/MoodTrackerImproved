@@ -34,7 +34,7 @@ class HistoryActivity : AppCompatActivity() {
         //Setting the adapter to recycle view
 
 
-        val daysInOrderObserver: androidx.lifecycle.Observer<ArrayList<Day>> =
+        val daysInOrderObserver: androidx.lifecycle.Observer<List<Day>> =
             androidx.lifecycle.Observer { dayInOrder -> adapter.daysInOrder = dayInOrder }
 
         model.daysInOrder.observe(this, daysInOrderObserver)
