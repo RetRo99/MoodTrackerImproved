@@ -7,27 +7,27 @@ import com.example.moodtrackerimproved.Mood.Mood
 import com.example.moodtrackerimproved.Mood.MoodBank
 import com.example.moodtrackerimproved.SharedPreferences.MoodKeeper
 
-class MoodViewModel(application: Application): AndroidViewModel(application) {
+class MainActivityViewModel(application: Application): AndroidViewModel(application) {
 
     //Creating MoodBank object
     private val moodBank = MoodBank()
 
     //Setting the default started mood
-    private var currentIndex = 3
+    private  var currentIndex = 3
 
     //Getting array of all possible moods
     private val moods = moodBank.getMoods()
 
     //Creating MutableLiveData that we will observe from Activity
-    val currentMood = MutableLiveData<Mood>()
+    val moodOnScreen = MutableLiveData<Mood>()
 
     //Getting object that stores Mood object of the last week
-    val moodKeeper = MoodKeeper()
+    val moodKeeper = MoodKeeper(application)
 
     //Setting the MutableLiveData to the saved current mood
     init {
-        currentMood.value = moods[moodKeeper.getCurrentMood]
-        currentIndex = moodKeeper.getCurrentMood
+        moodOnScreen.value = moods[moodKeeper.getCurrentMood()]
+        currentIndex = moodKeeper.getCurrentMood()
     }
 
     //Updates LiveData based on swipe up or swipe down
@@ -64,7 +64,24 @@ class MoodViewModel(application: Application): AndroidViewModel(application) {
 
     //Function to set the live data to new mood
     private fun setLiveData(index:Int){
-        currentMood.value = moods[index]
+        moodOnScreen.value = moods[index]
     }
+
+    fun getCurrentComment():String?{
+       return moodKeeper.getCurrentComment()
+    }
+
+    fun setCurrentComment(comment:String){
+        moodKeeper.saveCurrentComment(comment)
+    }
+
+    fun setCurrentDate(){
+        moodKeeper.setCurrentDate()
+    }
+
+    fun setCurrentMood(mood:Int){
+        moodKeeper.saveCurrentMood(mood)
+    }
+
 
 }
