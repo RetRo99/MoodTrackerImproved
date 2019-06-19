@@ -3,8 +3,8 @@ package com.example.moodtrackerimproved.ViewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.moodtrackerimproved.Mood.Mood
-import com.example.moodtrackerimproved.Mood.MoodBank
+import com.example.moodtrackerimproved.Model.Mood
+import com.example.moodtrackerimproved.SharedPreferences.MoodBank
 import com.example.moodtrackerimproved.SharedPreferences.MoodKeeper
 
 class MainActivityViewModel(application: Application): AndroidViewModel(application) {
@@ -26,7 +26,7 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
 
     //Setting the MutableLiveData to the saved current mood
     init {
-        moodOnScreen.value = moods[moodKeeper.getCurrentMood()]
+        moodOnScreen.value = moods[moodKeeper.getCurrentMood()-1]
         currentIndex = moodKeeper.getCurrentMood()
     }
 

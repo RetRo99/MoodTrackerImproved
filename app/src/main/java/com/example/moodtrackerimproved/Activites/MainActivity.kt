@@ -15,9 +15,10 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.view.GestureDetectorCompat
 import androidx.lifecycle.ViewModelProviders
 import com.example.moodtrackerimproved.Gestures.GestureListener
-import com.example.moodtrackerimproved.Mood.Mood
+import com.example.moodtrackerimproved.Model.Mood
 import com.example.moodtrackerimproved.R
-import com.example.moodtrackerimproved.Utils.Utils
+import com.example.moodtrackerimproved.Utils.createDialog
+import com.example.moodtrackerimproved.Utils.createMidnightAlarm
 import com.example.moodtrackerimproved.ViewModel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.comment_dialog.view.*
@@ -50,13 +51,11 @@ class MainActivity : AppCompatActivity() {
         //Create gesture detector  with Context and Gesture Listener
         mGestureDetector = GestureDetectorCompat(this, gestureListener)
 
-        if(isFirstTime()) setAlarmManager()
+        if (isFirstTime()) setAlarmManager()
 
         setOnCommentImageClick()
         setOnFaceImageClick()
         setOnHistoryImageClick()
-
-
 
         val moodOnScreenObserver: androidx.lifecycle.Observer<Mood> =
             androidx.lifecycle.Observer { moodOnScreen -> setScreen(moodOnScreen) }
@@ -71,52 +70,6 @@ class MainActivity : AppCompatActivity() {
         return super.onTouchEvent(event)
     }
 
-    @SuppressLint("InflateParams")
-    private fun createDialog() {
-
-        //Inflating the AlertDialog view from layout we defined in comment_dialog
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.comment_dialog, null)
-
-        //Getting AlertDialog builder from Context and Inflated AlertDialog view
-        val mBuilder = AlertDialog.Builder(this)
-            .setView(mDialogView)
-
-        //Checking if the current day has comment. If it has set it to edit text in AlertDialog
-        if (model.getCurrentComment() != null) mDialogView.dialogEditText.setText(model.getCurrentComment())
-        //Showing the AlertDialog from AlertDialog builder
-        val mAlertDialog = mBuilder.show()
-
-
-        //Show the keyboard when AlertDialog is shown
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-
-
-        //Set the focus in EditText after the last letter in EditText
-        mDialogView.dialogEditText.setSelection(mDialogView.dialogEditText.text.length)
-
-        //Set a listener on Cancel Button
-        mDialogView.cancelButton.setOnClickListener {
-            //Dismiss the AlertDialog
-            mAlertDialog.dismiss()
-        }
-        //Set a listener on Confirm Button
-        mDialogView.confirmButton.setOnClickListener {
-            //Saving the text in EditText
-            model.setCurrentComment(mDialogView.dialogEditText.text.toString())
-            //Dismiss the AlertDialog
-            mAlertDialog.dismiss()
-        }
-
-        //Setting a listener on when the AlertDialog is closed
-        mAlertDialog.setOnDismissListener {
-            //Hide the keyboard
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-
-        }
-
-
-    }
 
     //Set up the screen based on parameters
     private fun setScreen(mood: Mood) {
@@ -127,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         val mediaPath: Uri = Uri.parse("android.resource://$packageName/${mood.soundResource}")
 
 
-        //Setting up the datasource for MediaPlayer
+        //Setting up the DataSource for MediaPlayer
         try {
 
             mediaPlayer?.reset()
@@ -142,15 +95,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setOnFaceImageClick(){
+    private fun setOnFaceImageClick() {
         face_image_view.setOnClickListener {
             mediaPlayer?.start()
-            model.setCurrentMood(currentMood.mood)
+            model.setCurrentMood(currentMood.moodInt)
         }
 
     }
 
-    private fun setOnHistoryImageClick(){
+    private fun setOnHistoryImageClick() {
         imageViewHistory.setOnClickListener {
             //Creating an intent that we will use to start new Activity
             val intent = Intent(this, HistoryActivity::class.java)
@@ -159,35 +112,32 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    private fun setOnCommentImageClick(){
+
+    private fun setOnCommentImageClick() {
         imageViewComment.setOnClickListener {
-            createDialog()
+            createDialog(this, model)
         }
 
 
     }
 
-    private fun isFirstTime(): Boolean{
+    private fun isFirstTime(): Boolean {
         //For checking if this is the first time app has been run
         val firstTime = "First_time"
         val settings = getSharedPreferences(firstTime, 0)
         return settings.getBoolean("my_first_time", true)
 
 
-
-
     }
 
-    private fun setAlarmManager () {
+
+    private fun setAlarmManager() {
         //the app is being launched for first time, do something
         Log.d("Comments", "First time")
-        val utils = Utils()
-        utils.createMidnightAlarm(this)
+        createMidnightAlarm(this)
         model.setCurrentDate()
 
     }
-
-
 
 
 }
