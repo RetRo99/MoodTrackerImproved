@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.moodtrackerimproved.Model.Mood
-import com.example.moodtrackerimproved.SharedPreferences.MoodBank
-import com.example.moodtrackerimproved.SharedPreferences.MoodKeeper
+import com.example.moodtrackerimproved.Logic.MoodBank
+import com.example.moodtrackerimproved.Logic.MoodKeeper
 
 class MainActivityViewModel(application: Application): AndroidViewModel(application) {
 

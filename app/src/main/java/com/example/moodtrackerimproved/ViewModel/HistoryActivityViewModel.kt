@@ -2,7 +2,7 @@ package com.example.moodtrackerimproved.ViewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.moodtrackerimproved.SharedPreferences.MoodBank
+import com.example.moodtrackerimproved.Logic.MoodBank
 
 class HistoryActivityViewModel(application: Application): AndroidViewModel(application) {
 

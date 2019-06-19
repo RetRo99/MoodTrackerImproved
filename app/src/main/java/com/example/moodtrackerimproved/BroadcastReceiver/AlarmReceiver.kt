@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import com.example.moodtrackerimproved.SharedPreferences.MoodKeeper
+import com.example.moodtrackerimproved.Logic.MoodKeeper
 import com.example.moodtrackerimproved.Utils.createMidnightAlarm
 
 @Suppress("NAME_SHADOWING")

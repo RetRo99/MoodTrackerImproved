@@ -1,4 +1,4 @@
-package com.example.moodtrackerimproved.SharedPreferences
+package com.example.moodtrackerimproved.Logic
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -52,6 +52,15 @@ class MoodKeeper(context: Context) {
         sharedPrefComments.edit().putString(getCurrentDate(), getCurrentComment()).apply()
         sharedPrefMoods.edit().putInt(getCurrentDate(), getCurrentMood()).apply()
         setCurrentDate()
+    }
+
+    fun getMoodOn(dayInWeek:String):Int{
+        return sharedPrefMoods.getInt(dayInWeek, 3)
+    }
+
+
+    fun getCommentOn(dayInWeek:String):String?{
+        return  sharedPrefComments.getString(dayInWeek, null)
     }
 
 
