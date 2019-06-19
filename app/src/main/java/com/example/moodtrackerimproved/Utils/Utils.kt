@@ -6,7 +6,10 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.LayoutRes
 import com.example.moodtrackerimproved.BroadcastReceiver.AlarmReceiver
 import com.example.moodtrackerimproved.R
 import com.example.moodtrackerimproved.ViewModel.MainActivityViewModel
@@ -93,5 +96,9 @@ fun createDialog(context: Context, model: MainActivityViewModel) {
     }
 
 
+}
+
+fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 }
 
