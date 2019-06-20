@@ -20,6 +20,7 @@ import com.example.moodtrackerimproved.R
 import com.example.moodtrackerimproved.Utils.createDialog
 import com.example.moodtrackerimproved.Utils.createMidnightAlarm
 import com.example.moodtrackerimproved.ViewModel.MainActivityViewModel
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.comment_dialog.view.*
 
@@ -138,7 +139,6 @@ class MainActivity : AppCompatActivity() {
         model.setCurrentDate()
 
     }
-
 
 }
 

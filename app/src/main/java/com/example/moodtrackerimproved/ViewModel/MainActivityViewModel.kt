@@ -13,8 +13,7 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
     private val moodBank = MoodBank()
 
     //Setting the default started mood
-    private  var currentIndex = 3
-
+    private  var currentIndex:Int = 0
     //Getting array of all possible moods
     private val moods = moodBank.getMoods()
 
@@ -22,12 +21,16 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
     val moodOnScreen = MutableLiveData<Mood>()
 
     //Getting object that stores Mood object of the last week
-    val moodKeeper = MoodKeeper(application)
+    private val moodKeeper = MoodKeeper(application)
 
     //Setting the MutableLiveData to the saved current mood
-    init {
-        moodOnScreen.value = moods[moodKeeper.getCurrentMood()-1]
-        currentIndex = moodKeeper.getCurrentMood()
+   init {
+       setCurrentIndex()
+    }
+
+    fun setCurrentIndex(){
+        currentIndex= moodKeeper.getCurrentMood()-1
+        setLiveData(currentIndex)
     }
 
     //Updates LiveData based on swipe up or swipe down
@@ -82,6 +85,4 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
     fun setCurrentMood(mood:Int){
         moodKeeper.saveCurrentMood(mood)
     }
-
-
 }

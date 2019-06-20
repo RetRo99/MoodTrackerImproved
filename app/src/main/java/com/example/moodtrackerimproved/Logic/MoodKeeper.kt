@@ -85,8 +85,10 @@ class MoodKeeper(context: Context) {
             Calendar.FRIDAY -> today = "Friday"
             Calendar.SATURDAY -> today = "Saturday"
         }
-        sharedPrefCurrentDay.edit().putString(currentDay, today).apply()
-    }
+         sharedPrefCurrentDay.edit().putString(currentDay, today).apply()
+         sharedPrefCurrentComment.edit().putString(currentComment,null).apply()
+         sharedPrefCurrentMood.edit().putInt(currentMood,3).apply()
+     }
 
 
 
