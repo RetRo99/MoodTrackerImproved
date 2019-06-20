@@ -87,6 +87,7 @@ class MoodKeeper(context: Context) {
         }
          sharedPrefCurrentDay.edit().putString(currentDay, today).apply()
          sharedPrefCurrentComment.edit().putString(currentComment,null).apply()
+         //It shows the mood that i set up as default here
          sharedPrefCurrentMood.edit().putInt(currentMood,3).apply()
      }
 

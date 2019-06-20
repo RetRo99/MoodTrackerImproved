@@ -25,9 +25,11 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
 
     //Setting the MutableLiveData to the saved current mood
    init {
+        //Works if its being called from here. Basicly it remembers which mood was picked and showed that mood when app is opened
        setCurrentIndex()
     }
 
+    // If i call it onResume it sets up the default mood. (check class Logic.Moodkeeper line 90).
     fun setCurrentIndex(){
         currentIndex= moodKeeper.getCurrentMood()-1
         setLiveData(currentIndex)
