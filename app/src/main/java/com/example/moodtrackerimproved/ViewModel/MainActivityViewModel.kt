@@ -10,7 +10,7 @@ import com.example.moodtrackerimproved.Logic.MoodKeeper
 class MainActivityViewModel(application: Application): AndroidViewModel(application) {
 
     //Creating MoodBank object
-    private val moodBank = MoodBank()
+    private val moodBank = MoodBank(application)
 
     //Setting the default started mood
     private  var currentIndex:Int = 0
@@ -30,7 +30,7 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
     }
 
     // If i call it onResume it sets up the default mood. (check class Logic.Moodkeeper line 90).
-    fun setCurrentIndex(){
+    private fun setCurrentIndex(){
         currentIndex= moodKeeper.getCurrentMood()-1
         setLiveData(currentIndex)
     }
@@ -72,18 +72,22 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
         moodOnScreen.value = moods[index]
     }
 
+    //Returns the mood from sharedpreferences
     fun getCurrentComment():String?{
        return moodKeeper.getCurrentComment()
     }
 
+    //Saves the comment in sharedpreferences
     fun setCurrentComment(comment:String){
         moodKeeper.saveCurrentComment(comment)
     }
 
+    //Saves current day in sharedpreferences
     fun setCurrentDate(){
         moodKeeper.setCurrentDate()
     }
 
+    //Saves the current mood in sharedpreferences
     fun setCurrentMood(mood:Int){
         moodKeeper.saveCurrentMood(mood)
     }

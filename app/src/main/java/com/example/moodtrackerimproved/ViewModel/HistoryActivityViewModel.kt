@@ -9,14 +9,14 @@ import com.example.moodtrackerimproved.Model.Mood
 
 class HistoryActivityViewModel(application: Application): AndroidViewModel(application) {
 
-    private val moodBank = MoodBank()
+    private val moodBank = MoodBank(application)
 
     val daysInOrder = MutableLiveData<List<Day>>()
 
 
 
     init {
-        daysInOrder.value = moodBank.getOrderedDays(application)
+        daysInOrder.value = moodBank.getOrderedDays()
     }
 
 

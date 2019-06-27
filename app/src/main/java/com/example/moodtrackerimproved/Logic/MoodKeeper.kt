@@ -65,12 +65,20 @@ class MoodKeeper(context: Context) {
 
 
     fun getCurrentDate(): String?{
-        return sharedPrefCurrentDay.getString(currentDay, "Not happening")
+        return createCurrentDayString()
     }
 
      fun setCurrentDate(){
 
 
+
+         sharedPrefCurrentDay.edit().putString(currentDay, createCurrentDayString()).apply()
+         sharedPrefCurrentComment.edit().putString(currentComment,null).apply()
+         //It shows the mood that i set up as default here
+         sharedPrefCurrentMood.edit().putInt(currentMood,3).apply()
+     }
+
+    fun createCurrentDayString():String{
         val calendar: Calendar = Calendar.getInstance()
         val day: Int = calendar.get(Calendar.DAY_OF_WEEK)
 
@@ -85,11 +93,9 @@ class MoodKeeper(context: Context) {
             Calendar.FRIDAY -> today = "Friday"
             Calendar.SATURDAY -> today = "Saturday"
         }
-         sharedPrefCurrentDay.edit().putString(currentDay, today).apply()
-         sharedPrefCurrentComment.edit().putString(currentComment,null).apply()
-         //It shows the mood that i set up as default here
-         sharedPrefCurrentMood.edit().putInt(currentMood,3).apply()
-     }
+
+        return today
+    }
 
 
 

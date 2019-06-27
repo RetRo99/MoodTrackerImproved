@@ -5,7 +5,8 @@ import com.example.moodtrackerimproved.Model.Day
 import com.example.moodtrackerimproved.Model.Mood
 import com.example.moodtrackerimproved.R
 
-class MoodBank {
+class MoodBank(context: Context) {
+    private val mContext = context
 
 
     fun getMoods(): Array<Mood> {
@@ -39,10 +40,10 @@ class MoodBank {
         )
     }
 
-    fun getOrderedDays(context: Context): List<Day> {
+    fun getOrderedDays(): List<Day> {
 
         //Getting
-        val keeper = MoodKeeper(context)
+        val keeper = MoodKeeper(mContext)
         val daysInOrder: ArrayList<Day> = ArrayList()
         val moods = getMoods()
 

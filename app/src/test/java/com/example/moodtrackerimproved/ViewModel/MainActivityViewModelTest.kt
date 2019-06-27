@@ -23,35 +23,20 @@ class MainActivityViewModelTest {
     }
 
 
-    @Test
-    fun getMoodOnScreen() {
-    }
-
-    @Test
-    fun getMoodKeeper() {
-    }
-
-    @Test
-    fun increment() {
-    }
-
-    @Test
-    fun decrement() {
-    }
-
 
 
     @Test
     fun getCurrentComment() {
+        moodKeeper.saveCurrentComment("test123")
+        assertEquals("test123",model.getCurrentComment())
     }
 
     @Test
     fun setCurrentComment() {
+        model.setCurrentComment("test123")
+        assertEquals("test123", moodKeeper.getCurrentComment())
     }
 
-    @Test
-    fun setCurrentDate() {
-    }
 
     @Test
     fun setCurrentMood() {
@@ -69,8 +54,5 @@ class MainActivityViewModelTest {
 
     }
 
-    @Test
-    fun setCurrentIndex() {
-    }
 
 }
