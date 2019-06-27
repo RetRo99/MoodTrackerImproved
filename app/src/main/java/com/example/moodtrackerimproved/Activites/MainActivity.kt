@@ -52,15 +52,19 @@ class MainActivity : AppCompatActivity() {
         //Create gesture detector  with Context and Gesture Listener
         mGestureDetector = GestureDetectorCompat(this, gestureListener)
 
+        //only set up alarm on the first run of the app
         if (isFirstTime()) setAlarmManager()
 
+        //setting up click listeners on our images
         setOnCommentImageClick()
         setOnFaceImageClick()
         setOnHistoryImageClick()
 
+        //setting up the observer to observe livedata in viewmodel
         val moodOnScreenObserver: androidx.lifecycle.Observer<Mood> =
             androidx.lifecycle.Observer { moodOnScreen -> setScreen(moodOnScreen) }
 
+        //registering the observer on a proprety of viewmodel
         model.moodOnScreen.observe(this, moodOnScreenObserver)
 
     }
@@ -95,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         currentMood = mood
 
     }
-
+    //set up on click listener on face image
     private fun setOnFaceImageClick() {
         face_image_view.setOnClickListener {
             mediaPlayer?.start()
@@ -103,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
+    //set up on click listener on history image
     private fun setOnHistoryImageClick() {
         imageViewHistory.setOnClickListener {
             //Creating an intent that we will use to start new Activity
@@ -113,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
+        //set up on click listener on comment image
     private fun setOnCommentImageClick() {
         imageViewComment.setOnClickListener {
             createDialog(this, model)
@@ -122,6 +126,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //checking if the app is being run for the first time
     private fun isFirstTime(): Boolean {
         //For checking if this is the first time app has been run
         val firstTime = "First_time"
@@ -132,6 +137,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    //Setting up the alarammanager
     private fun setAlarmManager() {
         //the app is being launched for first time, do something
         Log.d("Comments", "First time")

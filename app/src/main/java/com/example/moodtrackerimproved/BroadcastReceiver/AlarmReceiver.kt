@@ -14,12 +14,19 @@ class AlarmReceiver : BroadcastReceiver() {
         val intentAction = "MIDNIGHT_ALARM"
         val keeper = MoodKeeper(context)
 
-        when(intent?.action){
-            Intent.ACTION_BOOT_COMPLETED -> {createMidnightAlarm(context)
-                                                keeper.saveDay()
-                                             Log.d("Set up alarm at midnig", "huray")}
-            intentAction -> {keeper.saveDay()
-                            Log.d("Saved day", "huray")}
+        //It either receives on boot action on my custom action
+        when (intent?.action) {
+            //If it is a reboot it registers alarm again and check if it needs to save the day
+            Intent.ACTION_BOOT_COMPLETED -> {
+                createMidnightAlarm(context)
+                keeper.saveDay()
+                Log.d("Set up alarm at midnig", "huray")
+            }
+            //if it it our action then it saves the day
+            intentAction -> {
+                keeper.saveDay()
+                Log.d("Saved day", "huray")
+            }
         }
 
 
