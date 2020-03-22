@@ -1,23 +1,24 @@
 package com.example.moodtrackerimproved.logic
 
 import androidx.test.core.app.ApplicationProvider
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 
 class MoodBankTest {
-     lateinit var bank:MoodBank
+
+    lateinit var bank: MoodBank
 
     @Before
     fun setUp() {
-       bank = MoodBank(ApplicationProvider.getApplicationContext())
+        bank = MoodBank(ApplicationProvider.getApplicationContext())
 
     }
+
     @Test
     fun getMoods() {
 

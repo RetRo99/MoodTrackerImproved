@@ -9,7 +9,6 @@ import com.example.moodtrackerimproved.model.Day
 import com.example.moodtrackerimproved.utils.inflate
 import kotlinx.android.synthetic.main.row_item.view.*
 
-
 class DayAdapter(private val height: Int, private val width: Int) :
     RecyclerView.Adapter<DayAdapter.DayHolder>() {
 

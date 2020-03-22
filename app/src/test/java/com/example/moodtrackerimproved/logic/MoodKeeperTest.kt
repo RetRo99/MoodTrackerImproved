@@ -1,10 +1,9 @@
 package com.example.moodtrackerimproved.logic
 
 import androidx.test.core.app.ApplicationProvider
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.robolectric.RobolectricTestRunner
@@ -14,43 +13,41 @@ import org.robolectric.RobolectricTestRunner
 
 class MoodKeeperTest {
 
-
-
     private lateinit var moodKeeper: MoodKeeper
-    private lateinit var moodKeeperMock:MoodKeeper
+    private lateinit var moodKeeperMock: MoodKeeper
 
     @Before
     fun setUp() {
         moodKeeper = MoodKeeper(ApplicationProvider.getApplicationContext())
 
-         moodKeeperMock = Mockito.spy(moodKeeper)
+        moodKeeperMock = Mockito.spy(moodKeeper)
         Mockito.doReturn("Sunday").`when`(moodKeeperMock).createCurrentDayString()
 
     }
+
     @Test
     fun saveCurrentComment() {
         moodKeeper.saveCurrentComment("test123")
-        assertEquals("test123",moodKeeper.getCurrentComment())
+        assertEquals("test123", moodKeeper.getCurrentComment())
     }
 
     @Test
     fun getCurrentComment() {
         moodKeeper.saveCurrentComment("test123")
-        assertEquals("test123",moodKeeper.getCurrentComment())
+        assertEquals("test123", moodKeeper.getCurrentComment())
     }
 
     @Test
     fun saveCurrentMood() {
         moodKeeper.saveCurrentMood(5)
-        assertEquals(5,  moodKeeper.getCurrentMood())
+        assertEquals(5, moodKeeper.getCurrentMood())
     }
 
     @Test
     fun getCurrentMood() {
         moodKeeper.saveCurrentMood(5)
-        assertEquals(5,  moodKeeper.getCurrentMood())
+        assertEquals(5, moodKeeper.getCurrentMood())
     }
-
 
 
     @Test
@@ -58,7 +55,7 @@ class MoodKeeperTest {
 
         moodKeeperMock.saveCurrentMood(5)
         moodKeeperMock.saveDay()
-        assertEquals(5,moodKeeperMock.getMoodOn("Sunday"))
+        assertEquals(5, moodKeeperMock.getMoodOn("Sunday"))
 
     }
 
@@ -66,7 +63,7 @@ class MoodKeeperTest {
     fun getCommentOn() {
         moodKeeperMock.saveCurrentComment("test123")
         moodKeeperMock.saveDay()
-        assertEquals("test123",moodKeeperMock.getCommentOn("Sunday"))
+        assertEquals("test123", moodKeeperMock.getCommentOn("Sunday"))
     }
 
     @Test
