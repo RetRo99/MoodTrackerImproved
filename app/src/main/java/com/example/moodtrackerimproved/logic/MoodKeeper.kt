@@ -37,7 +37,7 @@ class MoodKeeper(context: Context) {
 
     //returnig the string for current day that is stored in sharedpreferences
     fun getCurrentComment(): String? {
-        return sharedPrefCurrentComment.getString(currentComment, null)
+        return sharedPrefCurrentComment.getString(currentComment, "")
     }
 
     //Saving the passed int as current mood
@@ -63,8 +63,8 @@ class MoodKeeper(context: Context) {
     }
 
     //returns comment on a specific day
-    fun getCommentOn(dayInWeek: String): String? {
-        return sharedPrefComments.getString(dayInWeek, null)
+    fun getCommentOn(dayInWeek: String): String {
+        return sharedPrefComments.getString(dayInWeek, "") ?: ""
     }
 
 
@@ -77,7 +77,7 @@ class MoodKeeper(context: Context) {
     fun setCurrentDate() {
 
         sharedPrefCurrentDay.edit().putString(currentDay, createCurrentDayString()).apply()
-        sharedPrefCurrentComment.edit().putString(currentComment, null).apply()
+        sharedPrefCurrentComment.edit().putString(currentComment, "").apply()
         //It shows the mood that i set up as default here
         sharedPrefCurrentMood.edit().putInt(currentMood, 3).apply()
     }

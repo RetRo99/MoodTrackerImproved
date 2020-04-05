@@ -1,6 +1,7 @@
 package com.example.moodtrackerimproved.logic
 
 import android.content.Context
+import android.widget.Toast
 import com.example.moodtrackerimproved.R
 import com.example.moodtrackerimproved.model.Day
 import com.example.moodtrackerimproved.model.Mood
@@ -76,7 +77,7 @@ class MoodBank(context: Context) {
                     it,
                     moods.filter { it.moodInt == keeper.getMoodOn(daysInWeek[indexOfYesterday]) }[0],
                     keeper.getCommentOn(daysInWeek[indexOfYesterday]),
-                    keeper.getCommentOn(daysInWeek[indexOfYesterday]) != null
+                    keeper.getCommentOn(daysInWeek[indexOfYesterday]).isNotEmpty()
                 )
             )
             indexOfYesterday--

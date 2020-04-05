@@ -3,6 +3,7 @@ package com.example.moodtrackerimproved.gestures
 import android.view.GestureDetector
 import android.view.MotionEvent
 import com.example.moodtrackerimproved.viewModel.MainActivityViewModel
+import kotlin.math.abs
 
 //Creating a class that extends  GestureDetector.OnGestureListener which detects clicks on screen. We take  model in
 //constructor. We only override the onFling function
@@ -39,16 +40,14 @@ class GestureListener(private val model: MainActivityViewModel) :
             val diffX = e2.y - e1.y
 
             //Checking if the swipe was UP or DOWN
-            if (Math.abs(diffX) > Math.abs(diffY)) {
-                if (Math.abs(diffX) > swipeThreshold && Math.abs(velocityX) > swipeVelocityThreshold) {
+            if (abs(diffX) > abs(diffY)) {
+                if (abs(diffX) > swipeThreshold && abs(velocityX) > swipeVelocityThreshold) {
 
 
                     if (diffX > 0) {//Swipe down
-                        model.decrement()
-                    } else { //Swipe up
                         model.increment()
-
-
+                    } else { //Swipe up
+                        model.decrement()
                     }
                 }
             }

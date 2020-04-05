@@ -12,8 +12,6 @@ class MidnightWorker(appContext: Context, workerParams: WorkerParameters) :
 
     override fun doWork(): Result {
         keeper.saveDay()
-        Log.d("Saved day", "huray")
-
         return Result.success()
 
     }
