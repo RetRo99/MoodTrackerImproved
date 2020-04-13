@@ -12,5 +12,19 @@
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="commentImage">This mood has a comment</string>
+    <string name="day_monday">Monday</string>
+    <string name="day_tuesday">Tuesday</string>
+    <string name="day_wednesday">Wednesday</string>
+    <string name="day_thursday">Thursday</string>
+    <string name="day_saturday">Saturday</string>
+    <string name="day_friday">Friday</string>
+    <string name="day_sunday">Sunday</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="two_days_ago">Two days ago</string>
+    <string name="three_days_ago">Three days ago</string>
+    <string name="four_days_ago">Four days ago</string>
+    <string name="five_days_ago">Five days ago</string>
+    <string name="six_days_ago">Six days ago</string>
+    <string name="a_week_ago">One week ago</string>
 
 </resources>

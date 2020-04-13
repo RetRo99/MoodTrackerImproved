@@ -2,52 +2,43 @@ package com.example.moodtrackerimproved.logic
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
+import com.example.moodtrackerimproved.R
 import java.util.*
 
-class MoodKeeper(context: Context) {
+class MoodKeeper(private val context: Context) {
 
-    //Assigning variables to later create SharedPreferences objects
-    private val commentsPref = "comments"
-    private val moodPref = "mood"
-    private val dayPref = "currentDayPref"
-    private val currentMoodPref = "currentMoodPref"
-    private val currentCommentPref = "currentCommentPref"
-    private val currentComment = "current_comment"
-    private val currentMood = "current_mood"
-    private val currentDay = "current_day"
 
     //Creating SharedPreferences objects from variables we defined before
     private val sharedPrefComments: SharedPreferences =
-        context.getSharedPreferences(commentsPref, Context.MODE_PRIVATE)
+        context.getSharedPreferences(COMMENTS_PREF, Context.MODE_PRIVATE)
     private val sharedPrefMoods: SharedPreferences =
-        context.getSharedPreferences(moodPref, Context.MODE_PRIVATE)
+        context.getSharedPreferences(MOOD_PREF, Context.MODE_PRIVATE)
     private val sharedPrefCurrentDay: SharedPreferences =
-        context.getSharedPreferences(dayPref, Context.MODE_PRIVATE)
+        context.getSharedPreferences(DAY_PREF, Context.MODE_PRIVATE)
     private val sharedPrefCurrentComment: SharedPreferences =
-        context.getSharedPreferences(currentCommentPref, Context.MODE_PRIVATE)
+        context.getSharedPreferences(CURRENT_COMMENT_PREF, Context.MODE_PRIVATE)
     private val sharedPrefCurrentMood: SharedPreferences =
-        context.getSharedPreferences(currentMoodPref, Context.MODE_PRIVATE)
+        context.getSharedPreferences(CURRENT_MOOD_PREF, Context.MODE_PRIVATE)
 
 
     //saving passed string as current comment in shared preferences
     fun saveCurrentComment(comment: String) {
-        sharedPrefCurrentComment.edit().putString(currentComment, comment).apply()
+        sharedPrefCurrentComment.edit().putString(CURRENT_COMMENT, comment).apply()
     }
 
     //returnig the string for current day that is stored in sharedpreferences
     fun getCurrentComment(): String? {
-        return sharedPrefCurrentComment.getString(currentComment, "")
+        return sharedPrefCurrentComment.getString(CURRENT_COMMENT, "")
     }
 
     //Saving the passed int as current mood
     fun saveCurrentMood(mood: Int) {
-        sharedPrefCurrentMood.edit().putInt(currentMood, mood).apply()
+        sharedPrefCurrentMood.edit().putInt(CURRENT_MOOD, mood).apply()
     }
 
     //Returning the int that is current mood in shared preferences
     fun getCurrentMood(): Int {
-        return sharedPrefCurrentMood.getInt(currentMood, 3)
+        return sharedPrefCurrentMood.getInt(CURRENT_MOOD, 3)
     }
 
     //Saves the current comment and current mood with current day as the holder
@@ -76,10 +67,10 @@ class MoodKeeper(context: Context) {
     //Resets the currentdaymood and currentdaycommnet shared preferences
     fun setCurrentDate() {
 
-        sharedPrefCurrentDay.edit().putString(currentDay, createCurrentDayString()).apply()
-        sharedPrefCurrentComment.edit().putString(currentComment, "").apply()
+        sharedPrefCurrentDay.edit().putString(CURRENT_DAY, createCurrentDayString()).apply()
+        sharedPrefCurrentComment.edit().putString(CURRENT_COMMENT, "").apply()
         //It shows the mood that i set up as default here
-        sharedPrefCurrentMood.edit().putInt(currentMood, 3).apply()
+        sharedPrefCurrentMood.edit().putInt(CURRENT_MOOD, 3).apply()
     }
 
     //returns the value of current day in string format
@@ -87,15 +78,29 @@ class MoodKeeper(context: Context) {
         val calendar: Calendar = Calendar.getInstance()
 
         return when (calendar.get(Calendar.DAY_OF_WEEK)) {
-            Calendar.SUNDAY -> "Sunday"
-            Calendar.MONDAY -> "Monday"
-            Calendar.TUESDAY -> "Tuesday"
-            Calendar.WEDNESDAY -> "Wednesday"
-            Calendar.THURSDAY -> "Thursday"
-            Calendar.FRIDAY -> "Friday"
-            Calendar.SATURDAY -> "Saturday"
+            Calendar.SUNDAY -> context.getString(R.string.day_sunday)
+            Calendar.MONDAY -> context.getString(R.string.day_monday)
+            Calendar.TUESDAY -> context.getString(R.string.day_tuesday)
+            Calendar.WEDNESDAY -> context.getString(R.string.day_wednesday)
+            Calendar.THURSDAY -> context.getString(R.string.day_thursday)
+            Calendar.FRIDAY -> context.getString(R.string.day_friday)
+            Calendar.SATURDAY -> context.getString(R.string.day_saturday)
             else -> throw  IllegalArgumentException("Unknown day")
 
         }
+    }
+
+    companion object {
+
+        //Assigning variables to later create SharedPreferences objects
+        private const val COMMENTS_PREF = "com.example.moodtrackerimproved.logic.comments"
+        private const val MOOD_PREF = "com.example.moodtrackerimproved.logic.mood"
+        private const val DAY_PREF = "com.example.moodtrackerimproved.logic.currentDayPref"
+        private const val CURRENT_MOOD_PREF = "com.example.moodtrackerimproved.logic.currentMoodPref"
+        private const val CURRENT_COMMENT_PREF = "com.example.moodtrackerimproved.logic.currentCommentPref"
+        private const val CURRENT_COMMENT = "com.example.moodtrackerimproved.logic.currentComment"
+        private const val CURRENT_MOOD = "com.example.moodtrackerimproved.logic.currentMood"
+        private const val CURRENT_DAY = "com.example.moodtrackerimproved.logic.currentDay"
+
     }
 }

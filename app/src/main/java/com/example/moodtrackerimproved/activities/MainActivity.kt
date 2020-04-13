@@ -129,11 +129,10 @@ class MainActivity : AppCompatActivity() {
     //checking if the app is being run for the first time
     private fun isFirstTime(): Boolean {
         //For checking if this is the first time a  pp has been run
-        val firstTime = "first_time"
-        val firstTimeSharedPref = getSharedPreferences(firstTime, Context.MODE_PRIVATE)
-        val isFirstTime = firstTimeSharedPref.getBoolean(firstTime, true)
+        val firstTimeSharedPref = getSharedPreferences(IS_FIRST_TIME, Context.MODE_PRIVATE)
+        val isFirstTime = firstTimeSharedPref.getBoolean(IS_FIRST_TIME, true)
         if (isFirstTime) {
-            firstTimeSharedPref.edit().putBoolean(firstTime, false).apply()
+            firstTimeSharedPref.edit().putBoolean(IS_FIRST_TIME, false).apply()
         }
         return isFirstTime
     }
@@ -146,7 +145,6 @@ class MainActivity : AppCompatActivity() {
         val ldt = LocalDateTime.now()
         val secondsInDay = 86400L
         val secondsUntilMidnight = secondsInDay - ldt.toLocalTime().toSecondOfDay()
-        Log.d("čič", "setupWorkManager: $secondsUntilMidnight")
         val work = PeriodicWorkRequestBuilder<MidnightWorker>(24, TimeUnit.HOURS)
             .setInitialDelay(secondsUntilMidnight, TimeUnit.SECONDS)
             .build()
@@ -154,10 +152,15 @@ class MainActivity : AppCompatActivity() {
 
         val workManager = WorkManager.getInstance(this)
         workManager.enqueueUniquePeriodicWork(
-            "midnight_worker",
+            MIDNIGHT_WORKER,
             ExistingPeriodicWorkPolicy.KEEP, work
         )
         model.setCurrentDate()
+    }
+
+    companion object{
+        const val MIDNIGHT_WORKER = "com.example.moodtrackerimproved.activities.midnightWorker"
+        const val IS_FIRST_TIME = "com.example.moodtrackerimproved.activities.isFirstTIme"
     }
 
 }

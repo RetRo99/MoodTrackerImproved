@@ -46,15 +46,4 @@ class HistoryActivity : AppCompatActivity() {
 
     }
 
-
-    //Function that returns the size of status bar
-
-    private fun getStatusBarHeight(): Int {
-        var result = 0
-        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
-        if (resourceId > 0) {
-            result = resources.getDimensionPixelSize(resourceId)
-        }
-        return result
-    }
 }

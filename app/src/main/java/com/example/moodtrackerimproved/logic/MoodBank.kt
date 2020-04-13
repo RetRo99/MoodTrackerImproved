@@ -6,8 +6,7 @@ import com.example.moodtrackerimproved.R
 import com.example.moodtrackerimproved.model.Day
 import com.example.moodtrackerimproved.model.Mood
 
-class MoodBank(context: Context) {
-    private val mContext = context
+class MoodBank(private val context: Context) {
 
 
     fun getMoods(): Array<Mood> {
@@ -49,22 +48,25 @@ class MoodBank(context: Context) {
     fun getOrderedDays(): List<Day> {
 
         //Getting
-        val keeper = MoodKeeper(mContext)
+        val keeper = MoodKeeper(context)
         val daysInOrder: ArrayList<Day> = ArrayList()
         val moods = getMoods()
 
         val daysInWeek = arrayOf(
-            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+            context.getString(R.string.day_monday), context.getString(R.string.day_tuesday), context.getString(
+                            R.string.day_wednesday), context.getString(R.string.day_thursday), context.getString(
+                                            R.string.day_friday), context.getString(
+                                            R.string.day_saturday), context.getString(R.string.day_sunday)
         )
 
         val daysAgo = arrayOf(
-            "Yesterday",
-            "Two days ago",
-            "Three days ago",
-            "Four days ago",
-            "Five days ago",
-            "Six days ago",
-            "One week ago"
+            context.getString(R.string.yesterday),
+            context.getString(R.string.two_days_ago),
+            context.getString(R.string.three_days_ago),
+            context.getString(R.string.four_days_ago),
+            context.getString(R.string.five_days_ago),
+            context.getString(R.string.six_days_ago),
+            context.getString(R.string.a_week_ago)
         )
 
         //Getting the index of current day. If we know current day index we also know the index of yesterday
